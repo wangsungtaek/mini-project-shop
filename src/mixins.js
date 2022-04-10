@@ -19,7 +19,7 @@ export default {
       })
     },
     $currencyFormat (value, format = '#,###') {
-      if (value == 0 || value == null) return 0
+      if (value === 0 || value == null) return 0
       var currency = format.substring(0, 1)
       if (currency === '$' || currency === '₩') {
         format = format.substring(1, format.length)
@@ -30,7 +30,7 @@ export default {
       var groupingSeparator = ','
       var maxFractionDigits = 0
       var decimalSeparator = '.'
-      if (format.indexOf('.') == -1) {
+      if (format.indexOf('.') === -1) {
         groupingSeparator = ','
       } else {
         if (format.indexOf(',') < format.indexOf('.')) {
@@ -58,7 +58,7 @@ export default {
         v = v.substring(1)
       }
 
-      if (maxFractionDigits > 0 && format.substring(format.length - 1, format.length == '0')) {
+      if (maxFractionDigits > 0 && format.substring(format.length - 1, format.length === '0')) {
         v = String(parseFloat(v).toFixed(maxFractionDigits))
       }
 
@@ -68,14 +68,14 @@ export default {
         v = v.substring(0, v.indexOf('.'))
       }
 
-      var regExp = /\D\g;
-      v = v.replace(regExp, "");
-      var r = /(\d+)(\d{3})/;
+      var regExp = /\D/g
+      v = v.replace(regExp, '')
+      var r = /(\d+)(\d{3})/
       while (r.test(v)) {
-        v = v.replace(r, '$1' + groupingSeparator + '$2');
+        v = v.replace(r, '$1' + groupingSeparator + '$2')
       }
 
-      return prefix + currency + String(v) + String(d);
+      return prefix + currency + String(v) + String(d)
     }
   }
 
